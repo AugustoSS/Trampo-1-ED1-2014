@@ -3,14 +3,14 @@
 #include <stdlib.h>
 
 int main(){ setvbuf(stdout, NULL, _IONBF, 0);
-	Lista L_1, L_2;
+	Lista n1, n2;
 	Lista add; //recebe a lista vinda da adição, imprim e libera os nós da lista
 	int escolha = 1, num;
 
-	criaLista(&L_1);
-	criaLista(&L_2);
+	criaLista(&n1);
+	criaLista(&n2);
 
-	while(escolha){
+	/*while(escolha){
 
 		printf("\n 0 - sair / 1 - insere lista 1 / 2 - insere lista 2 / 3 - soma / 4 - subtrai / 5 - multiplica) \n");
 		scanf("%d", &escolha);
@@ -37,10 +37,88 @@ int main(){ setvbuf(stdout, NULL, _IONBF, 0);
 			case 5: multiplica(&L_1, &L_2);
 				break;
 		}
+	}*/
+	
+	
+	/*O que será feito: primeiro, a escolha da quantidade de digitos pra cada numero (Lista 1 e Lista 2). Depois a inserção e, por último 
+	as operações ocorrerão de maneira automática.*/
+	
+	//char que conterá o digito, que será convertido em um inteiro de 0 a 9 atrávés de operações algébricas.
+	char digito;
+	
+	
+	
+	//quantidade de digitos que cada numero terá
+	int quantDigito;
+	
+	//indices de repetição
+	int i;
+	
+	printf("Insira a quantidade de digitos do primeiro número")
+	scanf("%d", &quantDigito);
+	
+	//inserção dos digitos do número, separados por espaço
+	while(i<=quantDigito){
+		
+		printf("digite um digito\n");
+		scanf("%c", &digito);
+		
+		//serve para considerar apenas os digitos diferentes de espaço
+		if(digito == "%[0-9]"){
+			
+				//conversão do char para inteiro de 0 a 9;	
+				num = digito-48;		
+				insereLista(&n1, num);
+				n2.tam++;
+				printLista(n1);
+				i++;
+		}
 	}
+	
+	i=0;
+	
+	
+	printf("Insira a quantidade de digitos do segundo número")
+	scanf("%d", &quantDigito);
+	
+	//inserção dos digitos do número, separados por espaço
+	
+	
+	while(i<=quantDigito){
+		
+		printf("digite um digito\n");
+		scanf("%c", &digito);
+		
+		//serve para considerar apenas os digitos diferentes de espaço
+		if(digito == "%[0-9]"){
+			
+				//conversão do char para inteiro de 0 a 9;	
+				num = digito-48;		
+				insereLista(&n2, num);
+				n2.tam++;
+				printLista(n2);
+				i++;
+		}
+	}
+	
+	//realiza a soma e exibe o resultado
+	add = soma(&n1, &n2);
+	printLista(add);
+	liberaLista(&add);
+	
+	//realiza a subtração e exibe o resultado
+	 subtrai(&n1, &n2);
+	
+	
 
-	liberaLista(&L_1);
-	liberaLista(&L_2);
+	//realiza a multiplicação e exibe o resultado
+	multiplica(&n1, &n2);
+	
+	
+	
+	
+	liberaLista(&n1);
+	liberaLista(&n2);
 
 	printf("BYE-BYE");
 
